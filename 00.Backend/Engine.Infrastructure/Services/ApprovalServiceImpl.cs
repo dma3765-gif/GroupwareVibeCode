@@ -213,6 +213,22 @@ public class ApprovalDocumentServiceImpl : IApprovalDocumentService
         return await ToDetailDtoAsync(doc, ct);
     }
 
+    public async Task<ApprovalDocumentDto> DelegateApproveAsync(string id, DelegateApproveRequest request, CancellationToken ct = default)
+    {
+        var doc = await GetDocumentForUpdateAsync(id, ct);
+        doc.DelegateApprove(_currentUser.UserId, request.OriginalUserId, request.Comment);
+        doc.UpdatedAt = DateTime.UtcNow;
+
+        await SaveAsync(doc, ct);
+        await SendNextApproverNotificationAsync(doc, ct);
+
+        if (doc.Status == ApprovalDocumentStatus.Completed)
+            await HandleCompletionAsync(doc, ct);
+
+        await _audit.LogAsync("APPROVAL_DELEGATE", "ApprovalDocument", id, ct: ct);
+        return await ToDetailDtoAsync(doc, ct);
+    }
+
     // ─── 결재함 조회 ───
 
     public async Task<PagedResult<ApprovalDocumentSummaryDto>> GetMyDraftsAsync(ApprovalBoxQuery query, CancellationToken ct = default)

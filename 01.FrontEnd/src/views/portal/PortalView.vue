@@ -106,7 +106,7 @@ import apiClient from '@/shared/api/apiClient'
 import { ElMessage } from 'element-plus'
 
 const router = useRouter()
-const dashboard = ref<Record<string, unknown> | null>(null)
+const dashboard = ref<Record<string, any> | null>(null)
 const checkedIn = ref(false)
 
 async function fetchDashboard() {

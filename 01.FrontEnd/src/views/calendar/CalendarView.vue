@@ -57,7 +57,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import apiClient from '@/shared/api/apiClient'
-const currentDate = ref(new Date()); const events = ref<Record<string,unknown>[]>([]); const calendars = ref<Record<string,unknown>[]>([])
+const currentDate = ref(new Date()); const events = ref<Record<string,any>[]>([]); const calendars = ref<Record<string,any>[]>([])
 const showCreate = ref(false); const editingEvent = ref<Record<string,unknown>|null>(null); const saving = ref(false)
 const evForm = ref({ title:'', calendarId:'', startDateTime:'', endDateTime:'', color:'#409eff', description:'' })
 function formatDate(v: unknown) { if (!v) return ''; return new Date(v as string).toLocaleDateString('ko-KR') }

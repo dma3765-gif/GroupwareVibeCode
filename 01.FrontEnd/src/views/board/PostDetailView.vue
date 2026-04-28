@@ -39,14 +39,14 @@ import apiClient from '@/shared/api/apiClient'
 import { useAuthStore } from '@/stores/auth'
 const route = useRoute(); const router = useRouter(); const auth = useAuthStore()
 const boardId = route.params.boardId as string; const postId = route.params.postId as string
-const post = ref<Record<string,unknown>>({}); const comments = ref<Record<string,unknown>[]>([]); const loading = ref(false); const newComment = ref('')
+const post = ref<Record<string,any>>({}); const comments = ref<Record<string,any>[]>([]); const loading = ref(false); const newComment = ref('')
 const canEdit = ref(false)
 async function fetch() {
   loading.value = true
   try {
     const r = await apiClient.get(`/boards/${boardId}/posts/${postId}`)
     post.value = r.data.data || {}
-    canEdit.value = post.value.authorId === auth.user?.id || auth.user?.role === 'Admin'
+    canEdit.value = post.value.authorId === auth.user?.userId || auth.user?.systemRole === 'SystemAdmin'
     try { const cr = await apiClient.get(`/boards/${boardId}/posts/${postId}/comments`); comments.value = cr.data.data?.items || [] } catch { /**/ }
   } finally { loading.value = false }
 }

@@ -80,6 +80,11 @@ public class ApprovalDocumentsController : BaseController
     public async Task<IActionResult> FinalApprove(string id, [FromBody] ApproveRequest request, CancellationToken ct)
         => Ok(await _service.FinalApproveAsync(id, request, ct));
 
+    /// <summary>대결 처리</summary>
+    [HttpPost("{id}/delegate-approve")]
+    public async Task<IActionResult> DelegateApprove(string id, [FromBody] DelegateApproveRequest request, CancellationToken ct)
+        => Ok(await _service.DelegateApproveAsync(id, request, ct));
+
     /// <summary>회수</summary>
     [HttpPost("{id}/recall")]
     public async Task<IActionResult> Recall(string id, CancellationToken ct)

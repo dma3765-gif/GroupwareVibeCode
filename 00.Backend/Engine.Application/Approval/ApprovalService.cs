@@ -153,6 +153,13 @@ public class ConsultRequest
     public string? Comment { get; set; }
 }
 
+public class DelegateApproveRequest
+{
+    /// <summary>원래 결재자 UserId</summary>
+    public string OriginalUserId { get; set; } = string.Empty;
+    public string? Comment { get; set; }
+}
+
 public class ApprovalBoxQuery : PagedRequest
 {
     public ApprovalDocumentStatus? Status { get; set; }
@@ -182,6 +189,7 @@ public interface IApprovalDocumentService
     Task<ApprovalDocumentDto> RejectAsync(string id, RejectRequest request, CancellationToken ct = default);
     Task<ApprovalDocumentDto> RecallAsync(string id, RecallRequest request, CancellationToken ct = default);
     Task<ApprovalDocumentDto> FinalApproveAsync(string id, ApproveRequest request, CancellationToken ct = default);
+    Task<ApprovalDocumentDto> DelegateApproveAsync(string id, DelegateApproveRequest request, CancellationToken ct = default);
 
     // 결재함 조회
     Task<PagedResult<ApprovalDocumentSummaryDto>> GetMyDraftsAsync(ApprovalBoxQuery query, CancellationToken ct = default);

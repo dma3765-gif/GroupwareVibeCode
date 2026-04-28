@@ -40,9 +40,14 @@ public class FileMetadata : BaseEntity
 /// <summary>시스템 코드</summary>
 public class SystemCode : BaseEntity
 {
-    public string Code { get; set; } = string.Empty;  // 코드 그룹
-    public string Value { get; set; } = string.Empty; // 코드 값
-    public string Label { get; set; } = string.Empty;
+    /// <summary>코드 그룹 (예: LEAVE_TYPE, POSITION_LEVEL)</summary>
+    public string GroupCode { get; set; } = string.Empty;
+    /// <summary>코드 그룹명</summary>
+    public string GroupName { get; set; } = string.Empty;
+    /// <summary>코드 값</summary>
+    public string Code { get; set; } = string.Empty;
+    /// <summary>코드 명칭</summary>
+    public string Name { get; set; } = string.Empty;
     public int SortOrder { get; set; } = 0;
     public bool IsActive { get; set; } = true;
     public string? Description { get; set; }
@@ -52,9 +57,9 @@ public class SystemCode : BaseEntity
 /// <summary>메뉴</summary>
 public class Menu : BaseEntity
 {
-    public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string? ParentId { get; set; }
+    public string? Route { get; set; }
     public string? Url { get; set; }
     public string? Icon { get; set; }
     public int SortOrder { get; set; } = 0;
@@ -68,7 +73,8 @@ public class Menu : BaseEntity
 public class SystemSetting : BaseEntity
 {
     public string Key { get; set; } = string.Empty;
-    public string Value { get; set; } = string.Empty;
+    public string? Value { get; set; }
     public string? Description { get; set; }
     public bool IsSecret { get; set; } = false;
+    public string Category { get; set; } = "General";
 }

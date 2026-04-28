@@ -1,3 +1,4 @@
+using Engine.Application.Admin;
 using Engine.Application.Approval;
 using Engine.Application.Attendance;
 using Engine.Application.Auth;
@@ -79,6 +80,12 @@ public static class InfrastructureExtensions
         services.AddScoped<IResourceReservationService, ResourceReservationServiceImpl>();
         services.AddScoped<INotificationService, NotificationServiceImpl>();
         services.AddScoped<IPortalService, PortalServiceImpl>();
+
+        // Admin Services
+        services.AddScoped<ISystemCodeService, SystemCodeServiceImpl>();
+        services.AddScoped<IMenuService, MenuServiceImpl>();
+        services.AddScoped<ISystemSettingService, SystemSettingServiceImpl>();
+        services.AddScoped<IAuditLogQueryService, AuditLogQueryServiceImpl>();
 
         return services;
     }

@@ -17,9 +17,14 @@
         <el-menu-item index="/portal"><el-icon><House /></el-icon><template #title>포털</template></el-menu-item>
         <el-menu-item index="/approval"><el-icon><Finished /></el-icon><template #title>전자결재</template></el-menu-item>
         <el-menu-item index="/board"><el-icon><Memo /></el-icon><template #title>게시판</template></el-menu-item>
-        <el-menu-item index="/calendar"><el-icon><Calendar /></el-icon><template #title>캘린더</template></el-menu-item>
+        <el-sub-menu index="calendar-group">
+          <template #title><el-icon><Calendar /></el-icon><span>캘린더</span></template>
+          <el-menu-item index="/calendar">캘린더</el-menu-item>
+          <el-menu-item index="/calendar/resources">자원 예약</el-menu-item>
+        </el-sub-menu>
         <el-menu-item index="/attendance"><el-icon><Timer /></el-icon><template #title>근태관리</template></el-menu-item>
         <el-menu-item v-if="isAdmin" index="/organizations"><el-icon><OfficeBuilding /></el-icon><template #title>조직관리</template></el-menu-item>
+        <el-menu-item v-if="isAdmin" index="/admin"><el-icon><Setting /></el-icon><template #title>관리자</template></el-menu-item>
       </el-menu>
     </el-aside>
 
@@ -55,7 +60,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import { Bell } from '@element-plus/icons-vue'
+import { Bell, Setting } from '@element-plus/icons-vue'
 import apiClient from '@/shared/api/apiClient'
 
 const auth = useAuthStore()
@@ -64,7 +69,7 @@ const sidebarCollapsed = ref(false)
 const unreadCount = ref(0)
 
 const user = computed(() => auth.user)
-const isAdmin = computed(() => ['SystemAdmin', 'OrgAdmin'].includes(user.value?.systemRole || ''))
+const isAdmin = computed(() => ['SystemAdmin', 'OrgAdmin', 'GroupwareAdmin'].includes(user.value?.systemRole || ''))
 
 async function fetchUnreadCount() {
   try {

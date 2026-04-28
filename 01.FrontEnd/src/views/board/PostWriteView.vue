@@ -28,7 +28,7 @@ import { useAuthStore } from '@/stores/auth'
 const route = useRoute(); const router = useRouter(); const auth = useAuthStore()
 const boardId = route.params.boardId as string
 const postId = route.query.postId as string | undefined
-const isAdmin = auth.user?.role === 'Admin'
+const isAdmin = auth.user?.systemRole === 'SystemAdmin'
 const form = ref({ title: '', content: '', isNotice: false })
 const saving = ref(false)
 onMounted(async () => {

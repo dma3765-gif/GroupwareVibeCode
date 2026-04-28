@@ -32,7 +32,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import apiClient from '@/shared/api/apiClient'
-const loading = ref(false); const notifications = ref<Record<string,unknown>[]>([]); const total = ref(0); const page = ref(1); const filter = ref('all')
+const loading = ref(false); const notifications = ref<Record<string,any>[]>([]); const total = ref(0); const page = ref(1); const filter = ref('all')
 const unreadCount = computed(() => notifications.value.filter(n => !n.isRead).length)
 async function fetchNotifications() {
   loading.value = true

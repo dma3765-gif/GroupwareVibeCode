@@ -95,7 +95,7 @@ import { ElMessage } from 'element-plus'
 import apiClient from '@/shared/api/apiClient'
 const loading = ref(false); const loadingLeave = ref(false); const today = new Date().toLocaleDateString('ko-KR')
 const selectedMonth = ref(new Date().toISOString().slice(0,7))
-const todayRecord = ref<Record<string,unknown>>({}); const records = ref<Record<string,unknown>[]>([]); const leaveBalances = ref<Record<string,unknown>[]>([]); const leaveRequests = ref<Record<string,unknown>[]>([])
+const todayRecord = ref<Record<string,any>>({}); const records = ref<Record<string,any>[]>([]); const leaveBalances = ref<Record<string,any>[]>([]); const leaveRequests = ref<Record<string,any>[]>([])
 const showLeaveDialog = ref(false); const savingLeave = ref(false)
 const leaveForm = ref({ leaveType: 'Annual', dateRange: [] as string[], reason: '' })
 const todayStatus = computed(() => {
