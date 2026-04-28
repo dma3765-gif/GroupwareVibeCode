@@ -1,0 +1,24 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+*.suo
+*.userprefs
+.DS_Store
+*.log
+uploads/
+
+# Node / Vue
+01.FrontEnd/node_modules/
+01.FrontEnd/dist/
+01.FrontEnd/.vite/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+appsettings.Development.json
